@@ -86,6 +86,22 @@
     </div>
 
 <h2>Publications</h2> <!-- Optional: Title for your list -->
+
+    <style>
+    ol {
+        counter-reset: item;
+    }
+    ol li {
+        counter-increment: item;
+        list-style-type: none;
+    }
+    ol li::before {
+        content: "[" counter(item) "]";
+        font-weight: bold;
+        margin-right: 5px;
+    }
+</style>
+    
    <ol reversed>
     <li>
         Lennon, C., Teltser, K. F., Fernandez, J., & Gohmann, S. (2023). <a href="JEBO Morality.pdf" target="_blank">How morality and efficiency shape public support for minimum wages</a>. <i>Journal of Economic Behavior & Organization</i>, 205, 618-637.
