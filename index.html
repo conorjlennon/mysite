@@ -3,32 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> My Site </title>
+    <title>Conor J. Lennon - Associate Professor of Economics</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; }
-        nav { margin-bottom: 20px; }
-        a { text-decoration: none; color: #0073e6; }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #343a40;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #343a40; /* Dark grey */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #f8f9fa; /* White */
+            background-color: #495057; /* Medium dark grey */
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        nav a:hover {
+            background-color: #6c757d; /* Light grey */
+        }
+        h1 {
+            font-size: 2.5em;
+            margin: 20px 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            text-align: center; /* Center content */
+        }
+        img {
+            width: 25%; /* Reduced size */
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: block; /* Ensures it behaves as a block element */
+            margin-left: auto; /* Center horizontally */
+            margin-right: auto; /* Center horizontally */
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #e9ecef;
+            margin-top: 30px;
+        }
     </style>
 </head>
 <body>
+    <header>
+        <h1>Conor J. Lennon</h1>
+        <p>Associate Professor of Economics</p>
+        <p>Rensselaer Polytechnic Institute</p>
+    </header>
+    
     <nav>
-        <a href="index.html">Home</a> |
-        <a href="cv_jul_24.pdf"> Download my CV</a> |
+        <a href="index.html">Home</a>
+        <a href="cv_jul_24.pdf">Download my CV</a>
         <a href="https://scholar.google.com/citations?user=mjAz4_8AAAAJ&hl=en">Google Scholar</a>
     </nav>
 
+    <div class="container">
+        <img src="lennoc_Conor_Lennon_Socialmedia.jpg" alt="Conor Lennon smiling in a grey suit, blue shirt, and tie">
+        
+        <p>I am an applied microeconomist with research interests in health, labor, urban, and economic history.</p>
 
-    <h1>Conor J. Lennon, Associate Professor of Economics, Rensselaer Polytechnic Institute</h1>
+        <p>Email: <strong>lennoc [at] rpi [dot] edu</strong></p>
+        
+        <p>I am an Associate Professor of Economics and the Alma and H. Erwin Hale Chair at Rensselaer Polytechnic Institute.</p>
+    </div>
 
-<img src="lennoc_Conor_Lennon_Socialmedia.jpg" alt="Image if Dr. Conor Lennon smiling wearing a grey suit, blue shirt, and tie" width="20%" height="20%">
-
-    <p>I am a applied microeconomist with research interests in health, labor, urban, and economic history. </p>
-
-
-<p> Email: lennoc @ rpi dot edu <\p>
-<p> I am an Associate Professor of Economics and the Alma and H. Erwin Hale Chair at Rensselaer Polytechnic Institute. </p>
-
-
+    <footer>
+        <p>&copy; 2024 Conor J. Lennon. All rights reserved.</p>
+    </footer>
 </body>
 </html>
-
