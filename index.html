@@ -87,12 +87,15 @@
 
 <h2>Publications</h2> <!-- Optional: Title for your list -->
 
-  <style>
+<style>
     ol {
         counter-reset: item;
     }
-    ol[reversed] li {
-        counter-increment: item -1;
+    ol[reversed] {
+        counter-reset: item 15; /* Start with the number after the last one */
+    }
+    ol li {
+        counter-increment: item -1; /* Decrease the counter */
         list-style-type: none;
     }
     ol li::before {
