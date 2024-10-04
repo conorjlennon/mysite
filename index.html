@@ -14,52 +14,74 @@
             line-height: 1.6;
         }
         header {
-            background-color: #343a40; /* Dark grey */
+            background-color: #343a40;
             color: white;
-            padding: 20px;
+            padding: 40px 20px; /* More padding for a spacious feel */
             text-align: center;
+            border-bottom: 5px solid #6c757d; /* Decorative border */
         }
         nav {
             margin: 20px 0;
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
         }
         nav a {
             text-decoration: none;
-            color: #f8f9fa; /* White */
-            background-color: #495057; /* Medium dark grey */
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            color: #f8f9fa;
+            background-color: #495057;
+            padding: 12px 20px; /* Increased padding for buttons */
+            border-radius: 8px; /* More rounded corners */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            transition: background-color 0.3s, transform 0.3s; /* Added transition */
         }
         nav a:hover {
-            background-color: #6c757d; /* Light grey */
+            background-color: #6c757d;
+            transform: translateY(-2px); /* Slight lift on hover */
         }
         h1 {
             font-size: 2.5em;
-            margin: 20px 0;
+            margin: 10px 0; /* Reduced margin for a tighter look */
+        }
+        h2 {
+            margin-top: 40px; /* Added space above sections */
+            text-align: center; /* Centered subsection titles */
+            color: #495057; /* Darker gray for headings */
+            font-size: 1.8em; /* Increased size for prominence */
         }
         .container {
             max-width: 800px;
             margin: auto;
             padding: 20px;
-            text-align: center; /* Center content */
+            text-align: center;
         }
         img {
-            width: 25%; /* Reduced size */
+            width: 30%; /* Slightly larger image size */
             height: auto;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            display: block; /* Ensures it behaves as a block element */
-            margin-left: auto; /* Center horizontally */
-            margin-right: auto; /* Center horizontally */
+            border-radius: 15px; /* More rounded corners */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+            margin: 20px auto; /* Centering with auto margins */
         }
         footer {
             text-align: center;
             padding: 20px;
             background-color: #e9ecef;
             margin-top: 30px;
+            font-size: 0.9em; /* Slightly smaller font size */
+        }
+        ol {
+            counter-reset: item;
+            padding-left: 0; /* Reset padding */
+            list-style-type: none; /* No bullet points */
+        }
+        ol li {
+            counter-increment: item;
+            margin: 10px 0; /* Spacing between list items */
+        }
+        ol li::before {
+            content: "[" counter(item) "]"; /* List numbering */
+            font-weight: bold;
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -85,6 +107,8 @@
         <p>I am an Associate Professor of Economics and the Alma and H. Erwin Hale Chair at Rensselaer Polytechnic Institute.</p>
     </div>
 
+
+    
 <h2>Publications</h2> <!-- Optional: Title for your list -->
 
 <style>
