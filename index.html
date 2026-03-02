@@ -22,7 +22,7 @@
             --bg-color: #0a0a0a; /* Deep black */
             --text-main: #f8f9fa; /* Crisp white */
             --text-muted: #adb5bd; /* Light grey */
-            --accent: #d6001c; /* RPI Red */
+            --accent: #a30015; /* Deeper, richer RPI Red (toned down brightness) */
             --card-bg: #1c1c1c; /* Dark grey */
         }
 
@@ -42,7 +42,7 @@
 
         /* Hero Section */
         .hero {
-            /* Uses a dark grey/black gradient overlay over your generated image */
+            /* Uses a dark grey/black gradient overlay over your generated png image */
             background: linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.95)), url('hero-bg.png') center/cover no-repeat fixed;
             height: 70vh;
             display: flex;
@@ -92,7 +92,7 @@
         nav a:hover {
             background: var(--accent);
             color: #ffffff;
-            box-shadow: 0 0 15px rgba(214, 0, 28, 0.5); /* Red glow */
+            box-shadow: 0 0 15px rgba(163, 0, 21, 0.5); /* Toned down red glow */
         }
 
         /* Main Container */
@@ -121,9 +121,10 @@
         }
 
         .bio-section img {
-            width: 280px; /* Larger image size */
-            height: 280px;
-            object-fit: cover;
+            width: 260px; /* Set width */
+            height: 360px; /* Set height for a portrait rectangle */
+            object-fit: cover; /* Prevents stretching */
+            object-position: top center; /* Ensures the top of the photo stays in frame */
             border-radius: 12px; /* Soft square for a modern look */
             border: 3px solid var(--accent);
             box-shadow: 0 10px 20px rgba(0,0,0,0.5);
@@ -160,7 +161,7 @@
         }
 
         .pub-card {
-            background: #242424; /* Slightly lighter grey for contrast */
+            background: #242424;
             padding: 20px 25px;
             border-radius: 8px;
             border-left: 4px solid var(--accent);
