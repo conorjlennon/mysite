@@ -15,395 +15,323 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-obsidian: #0D0D12;
-            --text-ivory: #FAF8F5;
-            --text-muted: #adb5bd;
-            --rpi-red: #d6001c;
-            --card-slate: #1a1a24;
-            --card-slate-alt: #22222e;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+            --bg-color: #f4f5f7; /* Soft light gray for the page background */
+            --text-main: #2b2d31; /* Dark charcoal for high readability */
+            --text-muted: #6b7280; /* Medium gray for secondary text */
+            --accent: #a30015; /* RPI Red */
+            --card-bg: #ffffff; /* Pure white for containers and cards */
+            --border-light: #e5e7eb; /* Subtle border color for separation */
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-obsidian);
-            color: var(--text-ivory);
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             line-height: 1.7;
-            overflow-x: hidden;
-            /* Smooth scrolling for anchor links */
-            scroll-behavior: smooth;
         }
 
-        h1, h2, h3, .drama-text {
+        h1, h2, h3 {
             font-family: 'Playfair Display', serif;
-        }
-
-        .mono-text {
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        /* Global Noise Overlay */
-        .noise-overlay {
-            pointer-events: none;
-            position: fixed;
-            inset: 0;
-            z-index: 50;
-            opacity: 0.05;
-        }
-
-        /* A. NAVBAR - The Floating Island */
-        nav {
-            position: fixed;
-            top: 24px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 40;
-            display: flex;
-            align-items: center;
-            gap: 32px;
-            background-color: rgba(42, 42, 53, 0.6);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            padding: 16px 32px;
-            border-radius: 9999px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .nav-logo {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
             font-weight: 600;
-            font-size: 1.125rem;
-            letter-spacing: 0.025em;
         }
 
-        .nav-links {
+        /* Hero Section (Remains dark for cinematic impact) */
+        .hero {
+            background: linear-gradient(rgba(10, 10, 10, 0.75), rgba(10, 10, 10, 0.9)), url('hero-bg.png') center/cover no-repeat fixed;
+            height: 70vh;
             display: flex;
-            gap: 24px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            border-bottom: 4px solid var(--accent);
         }
 
-        .nav-links a {
+        .hero h1 {
+            font-size: 4em;
+            margin: 0;
+            color: #ffffff; /* Explicitly white against the dark background */
+            letter-spacing: 2px;
+            text-shadow: 2px 4px 10px rgba(0,0,0,0.8);
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            color: #e5e7eb; /* Light gray to stand out on dark background */
+            max-width: 600px;
+            margin-top: 15px;
+        }
+
+        /* Navigation */
+        nav {
+            margin-top: 30px;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
             text-decoration: none;
-            color: var(--text-muted);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.875rem;
+            color: #ffffff;
+            background: transparent;
+            border: 1px solid var(--accent);
+            padding: 12px 28px;
+            border-radius: 4px;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            transition: transform 0.3s, color 0.3s;
+            letter-spacing: 1px;
+            font-size: 0.9em;
+            transition: all 0.4s ease;
         }
 
-        .nav-links a:hover {
-            color: var(--text-ivory);
+        nav a:hover {
+            background: var(--accent);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(163, 0, 21, 0.4); 
             transform: translateY(-2px);
         }
 
-        .btn-primary {
-            text-decoration: none;
-            background-color: var(--rpi-red);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-primary:hover {
-            transform: scale(1.03);
-            box-shadow: 0 4px 15px rgba(214, 0, 28, 0.4);
-        }
-
-        /* B. HERO SECTION */
-        .hero {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 0 10% 8rem 10%;
-            /* Uses your local generated image */
-            background: linear-gradient(to top, var(--bg-obsidian) 0%, rgba(13, 13, 18, 0.8) 50%, transparent 100%), url('hero-bg.png') center/cover no-repeat fixed;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
+        /* Main Container */
+        .container {
             max-width: 900px;
-        }
-
-        .hero-sans {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-
-        .hero-drama {
-            font-size: clamp(3.5rem, 8vw, 7rem);
-            font-style: italic;
-            color: var(--rpi-red);
-            line-height: 1.1;
-            margin-top: 10px;
-        }
-
-        .hero-desc {
-            font-size: 1.125rem;
-            color: var(--text-muted);
-            font-weight: 300;
-            max-width: 600px;
-            margin-top: 30px;
-        }
-
-        /* C. PROTOCOL CARDS (Sticky Stacking) */
-        .protocol-section {
+            margin: -50px auto 40px; /* Pulls the white container up to overlap the dark hero */
+            padding: 50px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* Softer, wider shadow for light mode */
             position: relative;
             z-index: 10;
-            background-color: var(--bg-obsidian);
-            padding-bottom: 8rem;
         }
 
-        .card-container {
-            height: 100vh;
-            width: 100%;
+        /* Bio Section with Image on the Right */
+        .bio-section {
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            background-color: var(--bg-obsidian);
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
         }
 
-        .protocol-card {
-            width: 100%;
-            max-width: 1000px;
-            height: 70vh;
-            border-radius: 3rem;
-            padding: 4rem;
+        .bio-text {
+            flex: 1;
+        }
+
+        .bio-section img {
+            width: 260px; 
+            height: 360px; 
+            object-fit: cover; 
+            object-position: top center; 
+            border-radius: 12px; 
+            border: 3px solid var(--accent);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15); /* Slightly lighter shadow */
+            flex-shrink: 0;
+        }
+
+        .bio-text p {
+            margin-bottom: 15px;
+        }
+
+        .bio-text a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        
+        .bio-text a:hover {
+            color: var(--text-main);
+        }
+
+        h2 {
+            font-size: 2.2em;
+            color: var(--text-main); /* Changed from white to dark charcoal */
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 10px;
+            margin-top: 50px;
+        }
+
+        /* Publications Styling */
+        .publication-list {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            will-change: transform, opacity, filter;
+            gap: 15px; /* Slightly tighter gap */
         }
 
-        .bg-slate-1 { background-color: var(--card-slate); }
-        .bg-slate-2 { background-color: var(--card-slate-alt); }
-        .bg-slate-3 { background-color: #2A2A35; }
-
-        .protocol-step {
-            color: var(--rpi-red);
-            font-size: 1.25rem;
-            letter-spacing: 0.1em;
-            margin-bottom: 1.5rem;
+        .pub-card {
+            background: #ffffff;
+            padding: 20px 25px;
+            border-radius: 8px;
+            border: 1px solid var(--border-light); /* Added a subtle border */
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02); /* Very faint shadow to separate from container */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .protocol-title {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            font-style: italic;
-            margin-bottom: 1.5rem;
+        .pub-card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.06); /* Shadow expands slightly on hover */
         }
 
-        .protocol-desc {
-            font-size: 1.25rem;
+        .pub-card a {
+            color: var(--text-main); /* Changed from white to dark */
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .pub-card a:hover {
+            color: var(--accent);
+        }
+
+        .pub-card i {
             color: var(--text-muted);
-            max-width: 700px;
         }
 
-        /* Decorative Background SVGs for Cards */
-        .card-icon {
-            position: absolute;
-            right: -2rem;
-            bottom: -2rem;
-            width: 24rem;
-            height: 24rem;
-            opacity: 0.03;
-            color: white;
+        .pub-number {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-right: 10px;
         }
 
-        /* G. FOOTER */
-        footer {
-            position: relative;
-            z-index: 20;
-            background-color: #050508;
-            border-top-left-radius: 4rem;
-            border-top-right-radius: 4rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 6rem 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        /* Teaching Section */
+        .teaching-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .teaching-card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
             text-align: center;
+            border: 1px solid var(--border-light);
+            border-bottom: 3px solid transparent;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .teaching-card:hover {
+            border-bottom: 3px solid var(--accent);
+            transform: translateY(-3px); /* Subtle lift */
         }
 
-        footer h3 {
-            font-size: 2.25rem;
-            font-style: italic;
-            margin-bottom: 1rem;
-        }
-
-        .footer-tag {
+        footer {
+            text-align: center;
+            padding: 40px 20px;
             color: var(--text-muted);
-            font-size: 0.875rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: 3rem;
+            font-size: 0.9em;
+            border-top: 1px solid var(--border-light);
+            background-color: var(--card-bg); /* Matches the clean white */
+            margin-top: 40px;
         }
 
-        .status-indicator {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background-color: rgba(255, 255, 255, 0.05);
-            padding: 12px 24px;
-            border-radius: 9999px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background-color: #22c55e;
-            border-radius: 50%;
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: .5; }
-        }
-
-        /* Mobile Adjustments */
+        /* Mobile responsiveness */
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .protocol-card { padding: 2rem; border-radius: 2rem; }
-            .hero { padding-bottom: 4rem; }
+            .bio-section {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+            .hero h1 { font-size: 2.8em; }
+            .container {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <svg class="noise-overlay" xmlns="http://www.w3.org/2000/svg">
-        <filter id="noiseFilter">
-            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/>
-        </filter>
-        <rect width="100%" height="100%" filter="url(#noiseFilter)"/>
-    </svg>
-
-    <nav>
-        <span class="nav-logo">C. Lennon</span>
-        <div class="nav-links">
-            <a href="#research">Research</a>
-            <a href="#teaching">Teaching</a>
-        </div>
-        <a href="Conor Lennon - CV - Feb 2026.pdf" target="_blank" class="btn-primary">
-            View CV
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-        </a>
-    </nav>
-
     <header class="hero">
-        <div class="hero-content">
-            <div class="hero-text hero-sans">Empirical rigor meets</div>
-            <div class="hero-text hero-drama">Applied reality.</div>
-            <div class="hero-text hero-desc">
-                Associate Professor of Economics and the Alma and H. Erwin Hale Endowed Chair at Rensselaer Polytechnic Institute. Specializing in health, labor, and urban economic history.
-            </div>
-        </div>
+        <h1>Conor J. Lennon</h1>
+        <p>Associate Professor of Economics & Alma and H. Erwin Hale Endowed Chair<br>Rensselaer Polytechnic Institute</p>
+        <nav>
+            <a href="Conor Lennon - CV - Feb 2026.pdf" target="_blank">View CV</a>
+            <a href="https://scholar.google.com/citations?user=mjAz4_8AAAAJ&hl=en" target="_blank">Google Scholar</a>
+        </nav>
     </header>
 
-    <main class="protocol-section">
-        
-        <section id="research" class="card-container">
-            <div class="protocol-card bg-slate-1">
-                <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                <div class="protocol-step mono-text">01. PROTOCOL</div>
-                <h2 class="protocol-title">Empirical Research</h2>
-                <p class="protocol-desc">
-                    Investigating the intersections of public policy and human behavior. Recent work published in the <i>Journal of Health Economics</i> and the <i>Journal of Policy Analysis and Management</i>.
-                </p>
+    <div class="container">
+        <div class="bio-section">
+            <div class="bio-text">
+                <p>I am an applied microeconomist with research interests in health, labor, urban, and economic history. I completed my PhD in Economics at the University of Pittsburgh in 2016. Before that, I completed a Master's degree at NUI Galway and my Bachelor's degree at University College Dublin in Ireland.</p>
+                <p>Since 2022, I have been an Associate Professor of Economics and the Alma and H. Erwin Hale Chair at Rensselaer Polytechnic Institute. Prior to coming to RPI, I was an Associate Professor at the University of Louisville.</p>
+                <p>Email: <a href="mailto:lennoc@rpi.edu"><strong>lennoc [at] rpi [dot] edu</strong></a></p>
             </div>
-        </section>
+            <img src="lennoc_Conor_Lennon_Socialmedia.jpg" alt="Conor Lennon smiling in a grey suit, blue shirt, and tie">
+        </div>
 
-        <section id="teaching" class="card-container">
-            <div class="protocol-card bg-slate-2">
-                <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-                <div class="protocol-step mono-text">02. PROTOCOL</div>
-                <h2 class="protocol-title">Academic Instruction</h2>
-                <p class="protocol-desc">
-                    Fostering the next generation of economic thinkers through rigorous coursework in PhD-level Health Economics and undergraduate Labor Markets.
-                </p>
+        <h2>Publications</h2>
+        <div class="publication-list">
+            <div class="pub-card">
+                <span class="pub-number">[15]</span> Lennon, C., Maclean, C. J., Teltser, K. F. (2025). <a href="JHE SUD.pdf" target="_blank">Ride-sharing and Substance Use Disorder Treatment</a>. <i>Journal of Health Economics</i>, 99, 102941. [Also NBER working paper w33077]
             </div>
-        </section>
-
-        <section class="card-container">
-            <div class="protocol-card bg-slate-3">
-                <svg class="card-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                <div class="protocol-step mono-text">03. PROTOCOL</div>
-                <h2 class="protocol-title">Capital District Festival</h2>
-                <p class="protocol-desc">
-                    Organizing the inaugural Capital District Applied Microeconomics Festival on May 2, 2026, bringing together top scholars to discuss cutting-edge applied research.
-                </p>
+            <div class="pub-card">
+                <span class="pub-number">[14]</span> Lennon, C. (2025). <a href="JPAM Crowdout.pdf" target="_blank">Did the Affordable Care Act's Medicaid eligibility expansions crowd out private health insurance coverage?</a>. <i>Journal of Policy Analysis and Management</i>, 44, 1, 208-235.
             </div>
-        </section>
+            <div class="pub-card">
+                <span class="pub-number">[13]</span> Lennon, C. (2024). <a href="SEJ Employer Mandate.pdf" target="_blank">Did the Affordable Care Act increase the availability of employer‐sponsored health insurance?</a>. <i>Southern Economic Journal</i>, 91, 2, 713-757.
+            </div>
+            <div class="pub-card">
+                <span class="pub-number">[12]</span> Lennon, C., Teltser, K. F., Fernandez, J., & Gohmann, S. (2023). <a href="JEBO Morality.pdf" target="_blank">How morality and efficiency shape public support for minimum wages</a>. <i>Journal of Economic Behavior & Organization</i>, 205, 618-637.
+            </div>
+            <div class="pub-card">
+                <span class="pub-number">[11]</span> Lennon, C. (2023). <a href="EEH GI Bill.pdfF" target="_blank">Women’s educational attainment, marriage, and fertility: Evidence from the 1944 GI Bill</a>. <i>Explorations in Economic History</i>, 90, 101539.
+            </div>
+            <div class="pub-card">
+                <span class="pub-number">[10]</span> Lennon, C. (2022). <a href="EHB Truvada.pdf" target="_blank">Employer-sponsored health insurance and labor market outcomes for men in same-sex couples: Evidence from the advent of pre-exposure prophylaxis</a>. <i>Economics & Human Biology</i>, 47, 101156.
+            </div>
+            <div class="pub-card">
+                <span class="pub-number">[9]</span> Lennon, C. (2021). <a href="ILRR Online.pdf" target="_blank">How do online degrees affect labor market prospects? Evidence from a correspondence audit study</a>. <i>ILR Review</i>, 74(4), 920-947.
+            </div>
+            <div class="pub-card">
+                <span class="pub-number">[8]</span> Lennon, C. (2021). <a href="EHB ESI.pdf" target="_blank">Are the costs of employer-sponsored health insurance passed on to workers at the individual level?</a>. <i>Economics & Human Biology</i>, 41, 100995.
+            </div>
+            <div class="pub-card">
+                <span class="pub-number">[7]</span> Teltser, K., Lennon, C., & Burgdorf, J. (2021). <a href="JHE Uber.pdf" target="_blank">Do ridesharing services increase alcohol consumption?</a>. <i>Journal of Health Economics</i>, 77, 102451.
+            </div>
+            <div class="pub-card">
+                <span class="pub-number">[6]</span> Lennon, C. (2021). <a href="JEH GI Bill.pdf" target="_blank">GI Jane goes to college? Female educational attainment, earnings, and the Servicemen’s Readjustment Act of 1944</a>. <i>The Journal of Economic History</i>, 81(4), 1223-1253.
+            </div>
+            <div class="pub-card">
+                <span class="pub-number">[5]</span> Lennon, C., & Shohfi, T. (2021). <a href="JEBO Bourbon.pdf" target="_blank">Unbridled spirit: Illicit markets for bourbon whiskey</a>. <i>Journal of Economic Behavior & Organization</i>, 191, 1025-1045.
+            </div>
+            <div class="pub-card">
+                <span class="pub-number">[4]</span> Lennon, C., Fernandez, J., Gohmann, S., & Teltser, K. (2019). <a href="AEA PnP MW.pdf" target="_blank">Minimum wages, morality, and efficiency: A choice experiment</a>. <i>AEA Papers and Proceedings</i> 109, 176-181.
+            </div>
+            <div class="pub-card">
+                <span class="pub-number">[3]</span> Lennon, C. (2019). <a href="SEJ Gender.pdf" target="_blank">Employer‐sponsored health insurance and the gender wage gap: Evidence from the Employer Mandate</a>. <i>Southern Economic Journal</i>, 85(3), 742-765.
+            </div>
+            <div class="pub-card">
+                <span class="pub-number">[2]</span> Lennon, C. (2018). <a href="HE Obesity.pdf" target="_blank">Who pays for the medical costs of obesity? New evidence from the employer mandate</a>. <i>Health Economics</i>, 27(12), 2016-2029.
+            </div>
+            <div class="pub-card">
+                <span class="pub-number">[1]</span> Lennon, C. (2016). <a href="JLE Slave Escape Paper.pdf" target="_blank">Slave escape, prices, and the fugitive slave act of 1850</a>. <i>The Journal of Law and Economics</i>, 59(3), 669-695.
+            </div>
+        </div>
 
-    </main>
+        <h2>Teaching</h2>
+        <p>I teach a range of undergraduate and graduate courses, including:</p>
+        <div class="teaching-grid">
+            <div class="teaching-card">Health Economics II<br><small>(Graduate)</small></div>
+            <div class="teaching-card">Labor Markets & Discrimination<br><small>(Undergraduate)</small></div>
+            <div class="teaching-card">Intermediate Microeconomics<br><small>(Undergraduate)</small></div>
+        </div>
+        <p style="margin-top: 30px; text-align: center; color: var(--text-muted);">
+            <em>Prior to RPI:</em> Principles of Microeconomics & Macroeconomics, Intermediate Macroeconomics, Money and Banking, Philosophy, Politics, and Economics, American Economic History, Senior Seminar.
+        </p>
+    </div>
 
     <footer>
-        <h3>Conor J. Lennon</h3>
-        <p class="footer-tag mono-text">Rensselaer Polytechnic Institute</p>
-        
-        <div class="status-indicator">
-            <div class="status-dot"></div>
-            <span class="mono-text" style="font-size: 0.75rem; letter-spacing: 0.1em; color: var(--text-muted); text-transform: uppercase;">System Operational // 2026</span>
-        </div>
+        <p>&copy; 2026 Conor J. Lennon. All rights reserved.</p>
     </footer>
 
-    <script>
-        // Hero Entrance Animation
-        gsap.fromTo('.hero-text', 
-            { y: 50, opacity: 0 }, 
-            { y: 0, opacity: 1, duration: 1.2, stagger: 0.2, ease: 'power3.out', delay: 0.2 }
-        );
-
-        // Sticky Stacking Cards Logic
-        const cards = gsap.utils.toArray('.card-container');
-        
-        cards.forEach((container, index) => {
-            const card = container.querySelector('.protocol-card');
-            
-            ScrollTrigger.create({
-                trigger: container,
-                start: "top top",
-                end: "bottom top",
-                pin: true,
-                pinSpacing: false,
-                scrub: true,
-                animation: gsap.to(card, {
-                    scale: 0.9,
-                    opacity: 0.4,
-                    filter: "blur(10px)",
-                    ease: "power2.inOut"
-                })
-            });
-        });
-    </script>
 </body>
 </html>
